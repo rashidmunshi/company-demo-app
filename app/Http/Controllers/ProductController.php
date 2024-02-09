@@ -36,6 +36,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate(['name'=>'required']);
 
         $data = [
             'category_id' => $request->category_id,
@@ -43,7 +44,7 @@ class ProductController extends Controller
         ];
 
         Product::create($data);
-
+        $request->session()->flash('success', 'Product created successfully.');
         return redirect()->route('products.index');
     }
 }

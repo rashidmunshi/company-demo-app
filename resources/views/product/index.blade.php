@@ -12,8 +12,13 @@
 <body>
 
     <div class="container">
-        <a href="{{route('products.create')}}" class="btn btn-primary float-end">Add</a>
+        <a href="{{ route('products.create') }}" class="btn btn-primary float-end">Add</a>
         <h1 class="my-3">Products</h1>
+        @if (session('success'))
+            <div class="alert alert-success" id="flash-message">
+                {{ session('success') }}
+            </div>
+        @endif
         <table class="table table-bordered data-table">
             <thead>
                 <tr>
@@ -58,9 +63,13 @@
 
             ],
             paging: true,
-            pageLength: 5 
+            pageLength: 5
         });
-
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#flash-message').fadeOut('slow');
+            }, 3000); 
+        });
     });
 </script>
 
